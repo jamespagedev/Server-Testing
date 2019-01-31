@@ -9,7 +9,10 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique();
     tbl.text('platform').notNullable();
-    tbl.boolean('completed').defaultTo(false);
+    tbl
+      .boolean('completed')
+      .defaultTo(false)
+      .notNullable();
   });
 };
 

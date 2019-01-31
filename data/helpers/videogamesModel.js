@@ -1,18 +1,19 @@
 const db = require('../dbConfig.js');
 
 module.exports = {
-  insert,
+  addVideoGame,
   update,
   remove,
-  getAll,
-  findById
+  getAllVideoGames,
+  findById,
+  findByName
 };
 
-async function insert(videogame) {
-  const [id] = await db('videogames').insert(videogame);
+async function addVideoGame(videogame) {
+  const id = await db('videogames').insert(videogame);
 
   return db('videogames')
-    .where({ id })
+    .where('id', id)
     .first();
 }
 
@@ -24,10 +25,14 @@ function remove(id) {
   return null;
 }
 
-function getAll() {
-  return db('hobbits');
+function getAllVideoGames() {
+  return db('videogames');
 }
 
 function findById(id) {
   return null;
+}
+
+function findByName(name) {
+  return db('videogames').where('name', name);
 }

@@ -14,31 +14,50 @@ afterAll(async () => {
       - Testcase: get videogame that was just edited
       - Testcase: remove the videogame from database
     - Testset: add3/getAll the 3 videogames
-
+    - More Ideas to implement after MVP:
+      - Add testcases to check if entry has all required fields
 */
 
 // Testsuite
-describe('videogames model', () => {
+describe('Testsuite: videogamesModel', () => {
   // Testset
   describe('Testset: add/get/edit/get/remove the videogame', () => {
     // Testcase
-    it('add videogame', async () => {
+    it('Testcase: add videogame', async () => {
       // Setup
-      let firstVideogame = {
+      const firstVideogame = {
         name: 'Chronno Trigger',
         platform: 'snes',
-        completed: 0
+        completed: true
       };
 
       // Action(s)
-      await videogamesModel.insert(firstVideogame);
+      await videogamesModel.addVideoGame(firstVideogame);
+      const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)
-      const videogamesQuery = await db('videogames').where(
-        'name',
-        'Chronno Trigger'
+      expect(videogamesQuery).toHaveLength(1);
+    });
+
+    // Testcase
+    it('Testcase: get videogame that was just added', async () => {
+      // Setup
+      const firstVideogame = {
+        name: 'Chronno Trigger',
+        platform: 'snes',
+        completed: true
+      };
+
+      // Action(s)
+      const videogamesQuery = await videogamesModel.findByName(
+        firstVideogame.name
       );
+
+      // Result(s)
       expect(videogamesQuery[0].name).toBe(firstVideogame.name);
+      expect(videogamesQuery[0].platform).toBe(firstVideogame.platform);
+      // Use !! to turn boolean from number 0/1 to boolean true/false
+      expect(!!videogamesQuery[0].completed).toBe(firstVideogame.completed);
     });
   });
 });
