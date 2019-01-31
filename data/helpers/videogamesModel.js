@@ -22,10 +22,6 @@ async function editVideoGame(id, changes) {
     .where('id', id)
     .update(changes)
     .then(ids => (ids > 0 ? ids[0] : null));
-
-  return db('videogames')
-    .where('id', id)
-    .first();
 }
 
 function remove(id) {

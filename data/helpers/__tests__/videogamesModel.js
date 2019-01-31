@@ -93,5 +93,19 @@ describe('Testsuite: videogamesModel', () => {
       // Use !! to turn boolean from number 0/1 to boolean true/false
       expect(!!videogameQuery.completed).toBe(videogame.completed);
     });
+
+    // Testcase
+    it('Testcase: remove the videogame from database used in this testset', async () => {
+      // Setup
+      const videogame = await videogamesModel.findByName('Chrono Trigger');
+
+      // Action(s)
+      const videogamesQuery = await videogamesModel.removeVideoGame(
+        videogame.id
+      );
+
+      // Result(s)
+      expect(videogamesQuery).toHaveLength(0);
+    });
   });
 });
