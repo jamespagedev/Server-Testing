@@ -2,7 +2,7 @@ const db = require('../dbConfig.js');
 
 module.exports = {
   addVideoGame,
-  update,
+  editVideoGame,
   remove,
   getAllVideoGames,
   findById,
@@ -17,8 +17,15 @@ async function addVideoGame(videogame) {
     .first();
 }
 
-async function update(id, changes) {
-  return null;
+async function editVideoGame(id, changes) {
+  return await db('videogames')
+    .where('id', id)
+    .update(changes)
+    .then(ids => (ids > 0 ? ids[0] : null));
+
+  return db('videogames')
+    .where('id', id)
+    .first();
 }
 
 function remove(id) {
@@ -30,9 +37,13 @@ function getAllVideoGames() {
 }
 
 function findById(id) {
-  return null;
+  return db('videogames')
+    .where('id', id)
+    .first();
 }
 
 function findByName(name) {
-  return db('videogames').where('name', name);
+  return db('videogames')
+    .where('name', name)
+    .first();
 }

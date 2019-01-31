@@ -25,14 +25,14 @@ describe('Testsuite: videogamesModel', () => {
     // Testcase
     it('Testcase: add videogame', async () => {
       // Setup
-      const firstVideogame = {
+      const videogame = {
         name: 'Chronno Trigger',
         platform: 'snes',
         completed: true
       };
 
       // Action(s)
-      await videogamesModel.addVideoGame(firstVideogame);
+      await videogamesModel.addVideoGame(videogame);
       const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)
@@ -42,22 +42,56 @@ describe('Testsuite: videogamesModel', () => {
     // Testcase
     it('Testcase: get videogame that was just added', async () => {
       // Setup
-      const firstVideogame = {
+      const videogame = {
         name: 'Chronno Trigger',
         platform: 'snes',
         completed: true
       };
 
       // Action(s)
-      const videogamesQuery = await videogamesModel.findByName(
-        firstVideogame.name
-      );
+      const videogameQuery = await videogamesModel.findByName(videogame.name);
 
       // Result(s)
-      expect(videogamesQuery[0].name).toBe(firstVideogame.name);
-      expect(videogamesQuery[0].platform).toBe(firstVideogame.platform);
+      expect(videogameQuery.name).toBe(videogame.name);
+      expect(videogameQuery.platform).toBe(videogame.platform);
       // Use !! to turn boolean from number 0/1 to boolean true/false
-      expect(!!videogamesQuery[0].completed).toBe(firstVideogame.completed);
+      expect(!!videogameQuery.completed).toBe(videogame.completed);
+    });
+
+    // Testcase
+    it('Testcase: edit videogame name', async () => {
+      // Setup
+      let videogameChanges = await videogamesModel.findById(1);
+      videogameChanges['name'] = 'Chrono Trigger';
+
+      // Action(s)
+      await videogamesModel.editVideoGame(
+        videogameChanges.id,
+        videogameChanges
+      );
+      const videogamesQuery = await videogamesModel.getAllVideoGames();
+
+      // Result(s)
+      expect(videogamesQuery).toHaveLength(1);
+    });
+
+    // Testcase
+    it('Testcase: get videogame that was just edited', async () => {
+      // Setup
+      const videogame = {
+        name: 'Chrono Trigger',
+        platform: 'snes',
+        completed: true
+      };
+
+      // Action(s)
+      const videogameQuery = await videogamesModel.findByName(videogame.name);
+
+      // Result(s)
+      expect(videogameQuery.name).toBe(videogame.name);
+      expect(videogameQuery.platform).toBe(videogame.platform);
+      // Use !! to turn boolean from number 0/1 to boolean true/false
+      expect(!!videogameQuery.completed).toBe(videogame.completed);
     });
   });
 });
