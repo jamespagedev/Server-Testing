@@ -100,9 +100,8 @@ describe('Testsuite: videogamesModel', () => {
       const videogame = await videogamesModel.findByName('Chrono Trigger');
 
       // Action(s)
-      const videogamesQuery = await videogamesModel.removeVideoGame(
-        videogame.id
-      );
+      await videogamesModel.removeVideoGame(videogame.id);
+      const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)
       expect(videogamesQuery).toHaveLength(0);

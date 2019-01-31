@@ -3,7 +3,7 @@ const db = require('../dbConfig.js');
 module.exports = {
   addVideoGame,
   editVideoGame,
-  remove,
+  removeVideoGame,
   getAllVideoGames,
   findById,
   findByName
@@ -24,8 +24,10 @@ async function editVideoGame(id, changes) {
     .then(ids => (ids > 0 ? ids[0] : null));
 }
 
-function remove(id) {
-  return null;
+function removeVideoGame(id) {
+  return db('videogames')
+    .where('id', id)
+    .del();
 }
 
 function getAllVideoGames() {
