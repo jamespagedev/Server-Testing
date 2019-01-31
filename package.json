@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/jamespagedev/Server-Testing#readme",
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
     "supertest": "^3.3.0"
   },
   "dependencies": {

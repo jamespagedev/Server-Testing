@@ -27,18 +27,18 @@ describe('videogames model', () => {
       let firstVideogame = {
         name: 'Chronno Trigger',
         platform: 'snes',
-        completed: false
+        completed: 0
       };
 
       // Action(s)
-      await videogamesModel.insert(videogame);
+      await videogamesModel.insert(firstVideogame);
 
       // Result(s)
-      const videogameResult = await db('videogames').where(
+      const videogamesQuery = await db('videogames').where(
         'name',
         'Chronno Trigger'
       );
-      expect(videogameResult).toBe(firstVideogame);
+      expect(videogamesQuery[0].name).toBe(firstVideogame.name);
     });
   });
 });
