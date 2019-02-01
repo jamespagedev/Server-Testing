@@ -37,5 +37,40 @@ describe('Testsuite: videogamesRouter', () => {
       expect(response.status).toBe(201);
       expect(response.body.id).toBe(1);
     });
+
+    it('POST / add videogame', async () => {
+      const videogame = {
+        name: 'Parasite Eve',
+        platform: 'ps1',
+        completed: true
+      };
+      let response = await request(server)
+        .post('/api/videogames')
+        .send(videogame);
+
+      expect(response.status).toBe(201);
+      expect(response.body.id).toBe(2);
+    });
+
+    it('POST / add videogame', async () => {
+      const videogame = {
+        name: 'Xenogears',
+        platform: 'ps1',
+        completed: true
+      };
+      let response = await request(server)
+        .post('/api/videogames')
+        .send(videogame);
+
+      expect(response.status).toBe(201);
+      expect(response.body.id).toBe(3);
+    });
+
+    it('GET / all videogames', async () => {
+      let response = await request(server).get('/api/videogames');
+
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveLength(3);
+    });
   });
 });

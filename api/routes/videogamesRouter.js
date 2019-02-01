@@ -13,8 +13,14 @@ const router = express.Router();
 /***************************************************************************************************
  ********************************************** routes *********************************************
  **************************************************************************************************/
-// /api/videogames
+// /api/videogames - return an array list of all videogames
+router.get('/', async (req, res) => {
+  const videogames = await db.getAllVideoGames();
 
+  res.status(200).json(videogames);
+});
+
+// /api/videogames - Add a videogame
 router.post('/', (req, res) => {
   // implement user registration
   const videogame = req.body;

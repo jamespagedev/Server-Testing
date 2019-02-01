@@ -124,7 +124,7 @@ describe('Testsuite: videogamesModel', () => {
     it('Testcase: add first videogame', async () => {
       // Setup
       const videogame = {
-        name: 'Chronno Trigger',
+        name: 'Chrono Trigger',
         platform: 'snes',
         completed: true
       };
