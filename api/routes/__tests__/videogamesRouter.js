@@ -99,20 +99,6 @@ describe('Testsuite: videogamesRouter', () => {
       expect(response.body.id).toBe(1);
     });
 
-    it('Testcase: POST / add videogame', async () => {
-      const videogame = {
-        name: 'Chrono Trigger',
-        platform: 'snes',
-        completed: true
-      };
-      let response = await request(server)
-        .post('/api/videogames')
-        .send(videogame);
-
-      expect(response.status).toBe(201);
-      expect(response.body.id).toBe(2);
-    });
-
     // Testcase
     it('Testcase: getById videogame that was just added', async () => {
       const id = 1;
@@ -153,7 +139,7 @@ describe('Testsuite: videogamesRouter', () => {
 
   // Testcase
   it('Testcase: remove the videogame from database', async () => {
-    const id = 2;
+    const id = 1;
     let response = await request(server).delete(`/api/videogames/${id}`);
 
     console.log(response.body);
