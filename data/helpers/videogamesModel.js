@@ -18,10 +18,12 @@ async function addVideoGame(videogame) {
 }
 
 async function editVideoGame(id, changes) {
+  const numId = Number(id);
+
   return await db('videogames')
     .where('id', id)
     .update(changes)
-    .then(ids => (ids > 0 ? ids[0] : null));
+    .then(id => (id > 0 ? id : null));
 }
 
 function removeVideoGame(id) {
