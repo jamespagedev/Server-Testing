@@ -27,7 +27,7 @@ describe('Testsuite: videogamesModel', () => {
   // Testset
   describe('Testset: add/get/edit/get/remove the videogame', () => {
     // Testcase
-    it.only('Testcase: add videogame', async () => {
+    it('Testcase: add videogame', async () => {
       // Setup
       const videogame = {
         name: 'Chronno Trigger',
@@ -36,7 +36,7 @@ describe('Testsuite: videogamesModel', () => {
       };
 
       // Action(s)
-      const response = await videogamesModel.addVideoGame(videogame);
+      await videogamesModel.addVideoGame(videogame);
       const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)

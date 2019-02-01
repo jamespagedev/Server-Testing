@@ -24,7 +24,7 @@ afterAll(async () => {
 // Post stuff...
 describe('Testsuite: videogamesRouter', () => {
   describe('Testset: post 3 videogames and gets a list of all 3 videogames', () => {
-    it.skip('POST / add videogame', async () => {
+    it('POST / add videogame', async () => {
       const videogame = {
         name: 'Chrono Trigger',
         platform: 'snes',
@@ -34,8 +34,8 @@ describe('Testsuite: videogamesRouter', () => {
         .post('/api/videogames')
         .send(videogame);
 
-      // expect(response.body).toBe(expected); // fails because it's not the reference
       expect(response.status).toBe(201);
+      expect(response.body.id).toBe(1);
     });
   });
 });

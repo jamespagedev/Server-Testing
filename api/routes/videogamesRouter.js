@@ -19,14 +19,9 @@ router.post('/', (req, res) => {
   // implement user registration
   const videogame = req.body;
 
-  // db.addVideoGame(videogame)
-  //   .then(res => res.status(201).json({ id: Ids[0] }))
-  //   .catch(err => res.status(500).send(err));
-  if (videogame.name && videogame.platform) {
-    res.status(201).json({ name: `${videogame.name}` });
-  } else {
-    res.status(400).end();
-  }
+  db.addVideoGame(videogame)
+    .then(result => res.status(201).json(result))
+    .catch(err => res.status(500).send(err));
 });
 
 /***************************************************************************************************

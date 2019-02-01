@@ -10,10 +10,10 @@ module.exports = {
 };
 
 async function addVideoGame(videogame) {
-  const id = await db('videogames').insert(videogame);
+  const [id] = await db('videogames').insert(videogame);
 
   return db('videogames')
-    .where('id', id)
+    .where({ id })
     .first();
 }
 
