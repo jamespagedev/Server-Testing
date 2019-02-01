@@ -27,7 +27,7 @@ describe('Testsuite: videogamesModel', () => {
   // Testset
   describe('Testset: add/get/edit/get/remove the videogame', () => {
     // Testcase
-    it('Testcase: add videogame', async () => {
+    it.only('Testcase: add videogame', async () => {
       // Setup
       const videogame = {
         name: 'Chronno Trigger',
@@ -36,7 +36,7 @@ describe('Testsuite: videogamesModel', () => {
       };
 
       // Action(s)
-      await videogamesModel.addVideoGame(videogame);
+      const response = await videogamesModel.addVideoGame(videogame);
       const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)
@@ -104,10 +104,13 @@ describe('Testsuite: videogamesModel', () => {
       const videogame = await videogamesModel.findByName('Chrono Trigger');
 
       // Action(s)
-      await videogamesModel.removeVideoGame(videogame.id);
+      const deleteVideogame = await videogamesModel.removeVideoGame(
+        videogame.id
+      );
       const videogamesQuery = await videogamesModel.getAllVideoGames();
 
       // Result(s)
+      expect(deleteVideogame).toBe(1);
       expect(videogamesQuery).toHaveLength(0);
 
       // Cleanup Testset
